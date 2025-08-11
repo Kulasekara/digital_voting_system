@@ -2,46 +2,46 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axiosInstance from '../axiosConfig';
 
-const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask }) => {
+const ElectionForm = ({ elections, setElections, editingElection, setEditingElection }) => {
   const { user } = useAuth();
   const [formData, setFormData] = useState({ title: '', description: '', deadline: '' });
 
   useEffect(() => {
-    if (editingTask) {
+    if (editingElection) {
       setFormData({
-        title: editingTask.title,
-        description: editingTask.description,
-        deadline: editingTask.deadline,
+        title: editingElection.title,
+        description: editingElection.description,
+        deadline: editingElection.deadline,
       });
     } else {
       setFormData({ title: '', description: '', deadline: '' });
     }
-  }, [editingTask]);
+  }, [editingElection]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (editingTask) {
-        const response = await axiosInstance.put(`/api/tasks/${editingTask._id}`, formData, {
+      if (editingElection) {
+        const response = await axiosInstance.put(`/api/elections/${editingElection._id}`, formData, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
-        setTasks(tasks.map((task) => (task._id === response.data._id ? response.data : task)));
+        setElections(elections.map((election) => (election._id === response.data._id ? response.data : election)));
       } else {
-        const response = await axiosInstance.post('/api/tasks', formData, {
+        const response = await axiosInstance.post('/api/elections', formData, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
-        setTasks([...tasks, response.data]);
+        setElections([...elections, response.data]);
       }
-      setEditingTask(null);
+      setEditingElection(null);
       setFormData({ title: '', description: '', deadline: '' });
     } catch (error) {
-      alert('Failed to save task.');
+      alert('Failed to save election.');
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="bg-white p-6 shadow-md rounded mb-6">
-      <h1 className="text-2xl font-bold mb-4">{editingTask ? 'Your Form Name: Edit Operation' : 'Your Form Name: Create Operation'}</h1>
+      <h1 className="text-2xl font-bold mb-4">{editingElection ? 'Your Form Name: Edit Operation' : 'Your Form Name: Create Operation'}</h1>
       <input
         type="text"
         placeholder="Title"
@@ -63,10 +63,10 @@ const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask }) => {
         className="w-full mb-4 p-2 border rounded"
       />
       <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">
-        {editingTask ? 'Update Button' : 'Create Button'}
+        {editingElection ? 'Update Button' : 'Create Button'}
       </button>
     </form>
   );
 };
 
-export default TaskForm;
+export default ElectionForm;
