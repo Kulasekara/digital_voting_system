@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axiosInstance from '../axiosConfig';
 import ElectionForm from '../components/ElectionForm';
 import ElectionList from '../components/ElectionList';
@@ -26,7 +27,16 @@ const Elections = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <ElectionForm
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Election List</h1>
+        {/**<Link to="/elections/add">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
+            Add Election
+          </button>
+        </Link>
+        **/}
+      </div>
+  <ElectionForm
         elections={elections}
         setElections={setElections}
         editingElection={editingElection}

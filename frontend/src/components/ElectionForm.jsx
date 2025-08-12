@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom'; 
 import axiosInstance from '../axiosConfig';
 
 const ElectionForm = ({ elections, setElections, editingElection, setEditingElection }) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ title: '', description: '', deadline: '' });
 
   useEffect(() => {
@@ -34,14 +36,25 @@ const ElectionForm = ({ elections, setElections, editingElection, setEditingElec
       }
       setEditingElection(null);
       setFormData({ title: '', description: '', deadline: '' });
+      navigate('/elections')
     } catch (error) {
       alert('Failed to save election.');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 shadow-md rounded mb-6">
-      <h1 className="text-2xl font-bold mb-4">{editingElection ? 'Your Form Name: Edit Operation' : 'Your Form Name: Create Operation'}</h1>
+    <form onSubmit={handleSubmit} style={{ backgroundColor: '#dde6faff' }}className="bg-white p-6 shadow-md rounded mb-6">
+      <h1 className="text-2xl font-bold mb-4">{editingElection ? 'Edit Election' : 'Create Election'}</h1>
+      {/**<button
+          type="button"
+          onClick={() => {
+            setEditingElection?.(null);
+            navigate('/elections');                        
+          }}
+          className="text-sm underline"
+        >
+          Cancel
+        </button>**/}
       <input
         type="text"
         placeholder="Title"
@@ -62,7 +75,12 @@ const ElectionForm = ({ elections, setElections, editingElection, setEditingElec
         onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
       />
-      <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">
+      <button 
+      type="submit" 
+      onClick={() => {
+            navigate('/elections');                        
+          }}
+      className="w-full bg-blue-600 text-white p-2 rounded">
         {editingElection ? 'Update Button' : 'Create Button'}
       </button>
     </form>
