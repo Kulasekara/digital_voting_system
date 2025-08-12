@@ -11,8 +11,15 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-600 text-white p-4 flex justify-between items-center">
-      <Link to="/" className="text-2xl font-bold">VOTE SMART</Link>
+    <nav className="text-white p-4 flex justify-between items-center"
+    style={{ backgroundColor: '#002C5F' }}
+    >
+      <Link to="/" className="flex items-center text-2xl font-bold">
+    <img
+      src="/vote smart logo.png" 
+      alt="Vote Smart Logo"
+      className="h-20 w-50 mr-2 bg-white" 
+    />Your Vote, Your Voice</Link>
       <div>
         {user ? (
           <>
