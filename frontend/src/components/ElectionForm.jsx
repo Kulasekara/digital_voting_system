@@ -6,17 +6,18 @@ import axiosInstance from '../axiosConfig';
 const ElectionForm = ({ elections, setElections, editingElection, setEditingElection }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ title: '', description: '', deadline: '' });
+  const [formData, setFormData] = useState({ title: '', description: '', start_date:'', deadline: '' });
 
   useEffect(() => {
     if (editingElection) {
       setFormData({
         title: editingElection.title,
         description: editingElection.description,
+        start_date: editingElection.start_date,
         deadline: editingElection.deadline,
       });
     } else {
-      setFormData({ title: '', description: '', deadline: '' });
+      setFormData({ title: '', description: '',start_date:'', deadline: '' });
     }
   }, [editingElection]);
 
@@ -35,7 +36,7 @@ const ElectionForm = ({ elections, setElections, editingElection, setEditingElec
         setElections([...elections, response.data]);
       }
       setEditingElection(null);
-      setFormData({ title: '', description: '', deadline: '' });
+      setFormData({ title: '', description: '',start_date:'', deadline: '' });
       navigate('/elections')
     } catch (error) {
       alert('Failed to save election.');
@@ -44,7 +45,7 @@ const ElectionForm = ({ elections, setElections, editingElection, setEditingElec
 
   return (
     <form onSubmit={handleSubmit} style={{ backgroundColor: '#dde6faff' }}className="bg-white p-6 shadow-md rounded mb-6">
-      <h1 className="text-2xl font-bold mb-4">{editingElection ? 'Edit Election' : 'Create Election'}</h1>
+      <h1 className="text-2xl font-bold mb-4">{editingElection ? 'Edit the Election' : 'Create an Election'}</h1>
       {/**<button
           type="button"
           onClick={() => {
@@ -57,7 +58,7 @@ const ElectionForm = ({ elections, setElections, editingElection, setEditingElec
         </button>**/}
       <input
         type="text"
-        placeholder="Title"
+        placeholder="Election Name"
         value={formData.title}
         onChange={(e) => setFormData({ ...formData, title: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
@@ -71,6 +72,12 @@ const ElectionForm = ({ elections, setElections, editingElection, setEditingElec
       />
       <input
         type="date"
+        value={formData.start_date}
+        onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
+        className="w-full mb-4 p-2 border rounded"
+      />
+      <input
+        type="date"
         value={formData.deadline}
         onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
@@ -80,6 +87,7 @@ const ElectionForm = ({ elections, setElections, editingElection, setEditingElec
       onClick={() => {
             navigate('/elections');                        
           }}
+      style={{ backgroundColor: '#002C5F' }}
       className="w-full bg-blue-600 text-white p-2 rounded">
         {editingElection ? 'Update Button' : 'Create Button'}
       </button>
