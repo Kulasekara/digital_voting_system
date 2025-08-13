@@ -5,6 +5,7 @@ const electionSchema = new mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String },
     completed: { type: Boolean, default: false },
+    start_date: { type: Date },
     deadline: { type: Date },
 });
 

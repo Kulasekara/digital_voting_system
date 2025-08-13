@@ -4,7 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Elections from './pages/Elections';
-import ElectionForm  from './components/ElectionForm';
+import Candidates from './pages/Candidates';
 
 function App() {
   return (
@@ -15,7 +15,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/elections" element={<Elections />} />
-        <Route path="/elections/add" element={<ElectionForm />} />
+        <Route path="/candidates" element={<Candidates />} />
+
       </Routes>
     </Router>
   );
