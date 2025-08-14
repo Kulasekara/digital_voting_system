@@ -95,9 +95,9 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install backend deps (prod)
-        working-directory: ./backend
-        run: npm ci --omit=dev
+      #- name: Install backend deps (prod)
+       # working-directory: ./backend
+        #run: npm ci --omit=dev
 
       - name: Write .env (backend)
         working-directory: ./backend
@@ -117,9 +117,16 @@ jobs:
        # working-directory: ./frontend
         #run: npm run build
 
+      #- name: Restart app with PM2
+       # working-directory: ./backend
+        #run: |
+         # pm2 start ecosystem.config.js || pm2 start server.js --name election-backend
+          #pm2 reload all --update-env
+          #pm2 save
       - name: Restart app with PM2
-        working-directory: ./backend
         run: |
-          pm2 start ecosystem.config.js || pm2 start server.js --name election-backend
-          pm2 reload all --update-env
+          BACKEND_DIR="$GITHUB_WORKSPACE/backend"
+          pm2 describe election-backend >/dev/null 2>&1 && pm2 delete election-backend || true
+          pm2 start "$BACKEND_DIR/server.js" --name election-backend
+          pm2 reload election-backend --update-env || pm2 restart election-backend --update-env
           pm2 save
