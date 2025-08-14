@@ -51,9 +51,9 @@ jobs:
           yarn run build
       
       # ---- Backend: install + tests
-      - name: Install backend deps
-        working-directory: ./backend
-        run: npm ci
+      #- name: Install backend deps
+       # working-directory: ./backend
+        #run: npm ci
 
       - name: Run backend tests
         working-directory: ./backend
