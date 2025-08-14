@@ -129,7 +129,7 @@ jobs:
           #pm2 describe election-backend >/dev/null 2>&1 && pm2 delete election-backend || true
           #pm2 start "$BACKEND_DIR/server.js" --name election-backend
           #pm2 reload election-backend --update-env || pm2 restart election-backend --update-env
-          #pm2 save
+          #pm2 save .
 
       - name: Install & build frontend
         working-directory: ./frontend
