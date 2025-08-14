@@ -40,8 +40,8 @@ const ElectionList = ({ elections, setElections, setEditingElection }) => {
             <Link to="/candidates" className="mr-4"> 
           
             <button
-              className="bg-gray-500 text-white px-4 py-2 rounded"
-            >
+            style={{ backgroundColor: '#002C5F' }}
+              className="bg-gray-500 text-white px-4 py-2 rounded">
               Manage Candidate
             </button>
             </Link>

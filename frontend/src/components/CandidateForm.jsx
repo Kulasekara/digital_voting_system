@@ -74,7 +74,7 @@ const CandidateForm = ({ candidates, setCandidates, editingCandidate, setEditing
           }}
       style={{ backgroundColor: '#002C5F' }}
       className="w-full bg-blue-600 text-white p-2 rounded">
-        {editingCandidate ? 'Update Button' : 'Create Button'}
+        {editingCandidate ? 'Update' : 'Create'}
       </button>
     </form>
   );
