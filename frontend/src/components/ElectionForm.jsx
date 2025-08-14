@@ -89,7 +89,7 @@ const ElectionForm = ({ elections, setElections, editingElection, setEditingElec
           }}
       style={{ backgroundColor: '#002C5F' }}
       className="w-full bg-blue-600 text-white p-2 rounded">
-        {editingElection ? 'Update Button' : 'Create Button'}
+        {editingElection ? 'Update' : 'Create'}
       </button>
     </form>
   );
