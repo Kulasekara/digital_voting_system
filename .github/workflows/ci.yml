@@ -131,11 +131,11 @@ jobs:
           #pm2 reload election-backend --update-env || pm2 restart election-backend --update-env
           #pm2 save .
 
-      - name: Install & build frontend
-        working-directory: ./frontend
-        run: |
-          npm install
-          npm run build
+      #- name: Install & build frontend
+        #working-directory: ./frontend
+        #run: |
+         #npm install
+         # npm run build
 
       - name: Publish static site
         run: |
