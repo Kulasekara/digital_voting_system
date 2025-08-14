@@ -21,7 +21,7 @@ describe('AddElection Function Test', () => {
     // Mock request data
     const req = {
       user: { id: new mongoose.Types.ObjectId() },
-      body: { title: "New Election", description: "Election description", deadline: "2025-12-31" }
+      body: { title: "New Election", description: "Election description",start_date:"2025-09-31", deadline: "2025-12-31" }
     };
 
     // Mock election that would be created
@@ -55,7 +55,7 @@ describe('AddElection Function Test', () => {
     // Mock request data
     const req = {
       user: { id: new mongoose.Types.ObjectId() },
-      body: { title: "New Election", description: "Election description", deadline: "2025-12-31" }
+      body: { title: "New Election", description: "Election description",start_date:"2025-09-31", deadline: "2025-12-31" }
     };
 
     // Mock response object
@@ -88,6 +88,7 @@ describe('Update Function Test', () => {
       title: "Old Election",
       description: "Old Description",
       completed: false,
+      start_date: new Date(),
       deadline: new Date(),
       save: sinon.stub().resolvesThis(), // Mock save method
     };
