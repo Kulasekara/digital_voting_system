@@ -45,7 +45,7 @@ jobs:
           NODE_ENV: test
           JWT_SECRET: ${{ env.JWT_SECRET }}
           MONGO_URI: ${{ env.MONGO_URI }}
-        run: npm run test:ci
+        run: npm run test
 
       # ---- Frontend: install + build (if present)
       - name: Install frontend deps
