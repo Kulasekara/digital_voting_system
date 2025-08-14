@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axiosInstance from '../axiosConfig';
 import ElectionForm from '../components/ElectionForm';
 import ElectionList from '../components/ElectionList';
