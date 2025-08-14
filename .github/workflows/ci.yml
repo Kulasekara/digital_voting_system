@@ -49,6 +49,7 @@ jobs:
           sudo rm -rf ./build
           yarn install
           yarn run build
+      
       # ---- Backend: install + tests
       - name: Install backend deps
         working-directory: ./backend
@@ -108,13 +109,13 @@ jobs:
           PORT=${{ env.PORT }}
           EOF
 
-      - name: Install frontend deps
-        working-directory: ./frontend
-        run: npm ci
+      #- name: Install frontend deps
+       # working-directory: ./frontend
+        #run: npm ci
 
-      - name: Build frontend
-        working-directory: ./frontend
-        run: npm run build
+      #- name: Build frontend
+       # working-directory: ./frontend
+        #run: npm run build
 
       - name: Restart app with PM2
         working-directory: ./backend
