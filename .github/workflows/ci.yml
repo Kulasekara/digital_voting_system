@@ -42,17 +42,17 @@ jobs:
            yarn install
       
     # Install dependencies for frontend
-      #- name: Install Frontend Dependencies
-      #  working-directory: ./frontend
-       # run: |
-       #   df -h
-       #   sudo rm -rf ./build
-      #    yarn install
-      #    yarn run build
+      - name: Install Frontend Dependencies
+        working-directory: ./frontend
+        run: |
+          df -h
+          sudo rm -rf ./build
+          yarn install
+          yarn run build
       # ---- Backend: install + tests
-     # - name: Install backend deps
-     #   working-directory: ./backend
-      #  run: npm ci
+      - name: Install backend deps
+        working-directory: ./backend
+        run: npm ci
 
       - name: Run backend tests
         working-directory: ./backend
@@ -63,9 +63,9 @@ jobs:
         run: npm run test
 
       # ---- Frontend: install + build (if present)
-      #- name: Install frontend deps
-       # working-directory: ./frontend
-        #run: npm ci
+    #- name: Install frontend deps
+     #   working-directory: ./frontend
+      #  run: npm ci
 
       #- name: Build frontend
        # working-directory: ./frontend
