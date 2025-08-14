@@ -95,9 +95,9 @@ jobs:
         with:
           node-version: 22
 
-      #- name: Install backend deps (prod)
-       # working-directory: ./backend
-        #run: npm ci --omit=dev
+      - name: Install backend deps (prod)
+        working-directory: ./backend
+        run: npm ci --omit=dev
 
       - name: Write .env (backend)
         working-directory: ./backend
