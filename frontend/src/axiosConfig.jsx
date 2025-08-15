@@ -18,3 +18,9 @@ const axiosInstance = axios.create({
 
 export default axiosInstance;
 
+axiosInstance.interceptors.request.use((config) => {
+  // Log the final URL the browser will call
+  const finalUrl = (config.baseURL || '') + (config.url || '');
+  console.log('[axios request]', finalUrl);
+  return config;
+});
