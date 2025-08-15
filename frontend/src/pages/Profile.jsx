@@ -17,7 +17,7 @@ const Profile = () => {
     const fetchProfile = async () => {
       setLoading(true);
       try {
-        const response = await axiosInstance.get('/profile', {
+        const response = await axiosInstance.get('/auth/profile', {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         setFormData({
