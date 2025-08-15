@@ -1,5 +1,4 @@
-/**
- * // 1) Load env FIRST, from this folder's .env (robust with PM2)
+ // 1) Load env FIRST, from this folder's .env (robust with PM2)
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
@@ -25,15 +24,15 @@ app.use('/api/elections', require('./routes/electionRoutes'));
 app.use('/api/candidates', require('./routes/candidateRoutes'));
 
 if (require.main === module) {
-  const PORT = Number(process.env.PORT) || 3000; // <-- match Nginx
+  const PORT = Number(process.env.PORT) ||5001; // <-- match Nginx
   connectDB();
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }
 
 module.exports = app;
- */
-
-
+ 
+/** 
+*
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -59,4 +58,4 @@ if (require.main === module) {
   }
 
 
-module.exports = app
+module.exports = app*/
