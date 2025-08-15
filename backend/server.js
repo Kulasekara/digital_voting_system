@@ -1,13 +1,14 @@
  // 1) Load env FIRST, from this folder's .env (robust with PM2)
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
-
+const mongoose = require('mongoose');
+mongoose.set('strictQuery', true);
 const express = require('express');
 const cors = require('cors');
 
 // 2) Require DB after env is loaded (in case it reads env at import time)
 const connectDB = require('./config/db');
-const mongoose = require('mongoose');
+
 
 const app = express();
 
