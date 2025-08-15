@@ -25,12 +25,12 @@ const ElectionForm = ({ elections, setElections, editingElection, setEditingElec
     e.preventDefault();
     try {
       if (editingElection) {
-        const response = await axiosInstance.put(`/api/elections/${editingElection._id}`, formData, {
+        const response = await axiosInstance.put(`/elections/${editingElection._id}`, formData, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         setElections(elections.map((election) => (election._id === response.data._id ? response.data : election)));
       } else {
-        const response = await axiosInstance.post('/api/elections', formData, {
+        const response = await axiosInstance.post('/elections', formData, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         setElections([...elections, response.data]);

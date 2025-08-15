@@ -24,12 +24,12 @@ const CandidateForm = ({ candidates, setCandidates, editingCandidate, setEditing
     e.preventDefault();
     try {
       if (editingCandidate) {
-        const response = await axiosInstance.put(`/api/candidates/${editingCandidate._id}`, formData, {
+        const response = await axiosInstance.put(`/candidates/${editingCandidate._id}`, formData, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         setCandidates(candidates.map((candidates) => (candidates._id === response.data._id ? response.data : candidates)));
       } else {
-        const response = await axiosInstance.post('/api/candidates', formData, {
+        const response = await axiosInstance.post('/candidates', formData, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         setCandidates([...candidates, response.data]);

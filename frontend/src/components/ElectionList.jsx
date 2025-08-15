@@ -9,7 +9,7 @@ const ElectionList = ({ elections, setElections, setEditingElection }) => {
 
   const handleDelete = async (electionId) => {
     try {
-      await axiosInstance.delete(`/api/elections/${electionId}`, {
+      await axiosInstance.delete(`/elections/${electionId}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setElections(elections.filter((election) => election._id !== electionId));

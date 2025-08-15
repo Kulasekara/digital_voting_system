@@ -12,7 +12,7 @@ const Elections = () => {
   useEffect(() => {
     const fetchElections = async () => {
       try {
-        const response = await axiosInstance.get('/api/elections', {
+        const response = await axiosInstance.get('/elections', {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         setElections(response.data);

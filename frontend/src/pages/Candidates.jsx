@@ -12,7 +12,7 @@ const Candidates = () => {
   useEffect(() => {
     const fetchCandidates = async () => {
       try {
-        const response = await axiosInstance.get('/api/candidates', {
+        const response = await axiosInstance.get('/candidates', {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         setCandidates(response.data);

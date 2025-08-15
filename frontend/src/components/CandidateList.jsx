@@ -7,7 +7,7 @@ const CandidateList = ({ candidates, setCandidates, setEditingCandidate }) => {
 
   const handleDelete = async (candidateId) => {
     try {
-      await axiosInstance.delete(`/api/candidates/${candidateId}`, {
+      await axiosInstance.delete(`/candidates/${candidateId}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setCandidates(candidates.filter((candidate) => candidate._id !== candidateId));
