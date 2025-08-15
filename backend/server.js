@@ -16,7 +16,10 @@ app.use(express.json());
 
 // quick health check endpoint
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
-
+app.get('/api/db-status', (_req, res) => {
+  // 0=disconnected, 1=connected, 2=connecting, 3=disconnecting
+  res.json({ readyState: mongoose.connection.readyState });
+});
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/elections', require('./routes/electionRoutes'));
 app.use('/api/candidates', require('./routes/candidateRoutes'));
