@@ -7,6 +7,7 @@ const cors = require('cors');
 
 // 2) Require DB after env is loaded (in case it reads env at import time)
 const connectDB = require('./config/db');
+const mongoose = require('mongoose');
 
 const app = express();
 
