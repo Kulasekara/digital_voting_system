@@ -28,6 +28,7 @@ The deployed project is available at:
 👉 http://3.106.212.114
 
 If the above link doesn’t work:
+
   Log in to AWS Management Console → EC2 Dashboard
   Instance Name: Gayani_12279161
   Instance ID: i-09013f4a55ef869a6
@@ -45,7 +46,9 @@ If the above link doesn’t work:
 * **Use the following demo account to explore the platform:**
 
 👉 Admin Dashboard Access
+
   Username: admin@gmail.com
+  
   Password: admin
 
 ⏳ **Progress**
@@ -57,6 +60,7 @@ If the above link doesn’t work:
 - [ ] View Results – Display election results and provide reports  
 - [ ] Notifications – Email alerts for election start dates and results  
 - [ ] User Management – Admins can view, edit, update, and delete users  
+
 
 
 
