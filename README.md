@@ -51,8 +51,6 @@ http://<public-ip>
 _(Make sure to remove the “s” from https:// if your browser adds it)_
 
 
-
-
 🔑 **Test Login Credentials**
 
 * **Use the following demo account to explore the platform:**
@@ -60,8 +58,6 @@ _(Make sure to remove the “s” from https:// if your browser adds it)_
 👉 Admin Dashboard Access
   Username: admin@gmail.com
   Password: admin
-
-
 
 ⏳ **Progress**
 
@@ -72,4 +68,5 @@ _(Make sure to remove the “s” from https:// if your browser adds it)_
 - [ ] View Results – Display election results and provide reports  
 - [ ] Notifications – Email alerts for election start dates and results  
 - [ ] User Management – Admins can view, edit, update, and delete users  
+
 
