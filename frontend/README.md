@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+🗳️ **Digital Voting System – VoteSmart**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A secure and user-friendly online voting platform designed for university student elections. The system allows students to register, authenticate, and cast votes online, while administrators manage elections, candidates,users and results in real time.
 
-## Available Scripts
 
-In the project directory, you can run:
+**Project Objective**
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* **Project Management with JIRA**
+* **Requirement Diagram**, **Block Definition Diagram (**BDD), Parametric Diagram using**SysML**
+* **Version Control using GitHub**
+* **CI/CD Integration for Automated Deployment**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+🚀 **Features**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* User Registration & Login – Students can create accounts and log in securely. ✅
 
-### `npm run build`
+* Election Management – Admins can create, schedule, and manage elections.✅
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Candidate Management – Admins can add/edit/remove candidate profiles.✅
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* Voting System – Students cast votes securely, with one-vote-per-user validation.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* View Results – Display election results and generate reports
 
-### `npm run eject`
+* Notifications – Email alerts for election start dates and results
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* User Management – Admins can view, edit, update, and delete users
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+🌐 **Public URL**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The deployed project is available at:
+👉 http://3.106.212.114
 
-## Learn More
+If the above link doesn’t work:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Log in to AWS Management Console → EC2 Dashboard
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Instance Name: Gayani_12279161
 
-### Code Splitting
+Instance ID: i-09013f4a55ef869a6
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+[EC2 Instance Link] (https://ap-southeast-2.console.aws.amazon.com/ec2/home?region=ap-southeast-2#InstanceDetails:instanceId=i-09013f4a55ef869a6)
 
-### Analyzing the Bundle Size
+Copy the Public IPv4 Address of the instance
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Access the project using:
+http://<public-ip>
+_(Make sure to remove the “s” from https:// if your browser adds it)_
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+🔑 **Test Login Credentials**
 
-### Deployment
+* **Use the following demo account to explore the platform:**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+👉 Admin Dashboard Access
 
-### `npm run build` fails to minify
+Username: admin@gmail.com
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Password: admin
+
+
+⏳ **Progress**
+
+- [x] User Registration & Login – Students can create accounts and log in securely  
+- [x] Election Management – Admins can create, schedule, and manage elections  
+- [x] Candidate Management – Admins can add/edit/remove candidate profiles  
+- [ ] Voting System – Students cast votes securely, with one-vote-per-user validation  
+- [ ] View Results – Display election results and provide reports  
+- [ ] Notifications – Email alerts for election start dates and results  
+- [ ] User Management – Admins can view, edit, update, and delete users  

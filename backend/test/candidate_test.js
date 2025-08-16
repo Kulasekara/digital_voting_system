@@ -1,4 +1,3 @@
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const http = require('http');
@@ -6,8 +5,8 @@ const app = require('../server');
 const connectDB = require('../config/db');
 const mongoose = require('mongoose');
 const sinon = require('sinon');
-const Election = require('../models/Election');
-const { updateElection,getElection,addElection,deleteElection } = require('../controllers/electionController');
+const Candidate = require('../models/Candidate');
+const { getCandidate, addCandidate, updateCandidate, deleteCandidate } = require('../controllers/candidateController');
 const { expect } = chai;
 
 chai.use(chaiHttp);
@@ -15,20 +14,20 @@ let server;
 let port;
 
 
-describe('AddElection Function Test', () => {
+describe('AddCandidate Function Test', () => {
 
-  it('should create a new election successfully', async () => {
+  it('should create a new candidate successfully', async () => {
     // Mock request data
     const req = {
       user: { id: new mongoose.Types.ObjectId() },
-      body: { title: "New Election", description: "Election description",start_date:"2025-09-31", deadline: "2025-12-31" }
+      body: { name: "New Candidate", description: "Candidate description",university: "University" }
     };
 
-    // Mock election that would be created
-    const createdElection = { _id: new mongoose.Types.ObjectId(), ...req.body, userId: req.user.id };
+    // Mock Candidate that would be created
+    const createdCandidate = { _id: new mongoose.Types.ObjectId(), ...req.body, userId: req.user.id };
 
-    // Stub Election.create to return the createdElection
-    const createStub = sinon.stub(Election, 'create').resolves(createdElection);
+    // Stub Candidate.create to return the createdCandidate
+    const createStub = sinon.stub(Candidate, 'create').resolves(createdCandidate);
 
     // Mock response object
     const res = {
@@ -37,25 +36,25 @@ describe('AddElection Function Test', () => {
     };
 
     // Call function
-    await addElection(req, res);
+    await addCandidate(req, res);
 
     // Assertions
     expect(createStub.calledOnceWith({ userId: req.user.id, ...req.body })).to.be.true;
     expect(res.status.calledWith(201)).to.be.true;
-    expect(res.json.calledWith(createdElection)).to.be.true;
+    expect(res.json.calledWith(createdCandidate)).to.be.true;
 
     // Restore stubbed methods
     createStub.restore();
   });
 
   it('should return 500 if an error occurs', async () => {
-    // Stub Election.create to throw an error
-    const createStub = sinon.stub(Election, 'create').throws(new Error('DB Error'));
+    // Stub Candidate.create to throw an error
+    const createStub = sinon.stub(Candidate, 'create').throws(new Error('DB Error'));
 
     // Mock request data
     const req = {
       user: { id: new mongoose.Types.ObjectId() },
-      body: { title: "New Election", description: "Election description",start_date:"2025-09-31", deadline: "2025-12-31" }
+      body: { name: "New Candidate", description: "Candidate description",university: "University" }
     };
 
     // Mock response object
@@ -65,7 +64,7 @@ describe('AddElection Function Test', () => {
     };
 
     // Call function
-    await addElection(req, res);
+    await addCandidate(req, res);
 
     // Assertions
     expect(res.status.calledWith(500)).to.be.true;
@@ -80,25 +79,23 @@ describe('AddElection Function Test', () => {
 
 describe('Update Function Test', () => {
 
-  it('should update election successfully', async () => {
-    // Mock election data
-    const electionId = new mongoose.Types.ObjectId();
-    const existingElection = {
-      _id: electionId,
-      title: "Old Election",
+  it('should update candidate successfully', async () => {
+    // Mock Candidate data
+    const candidateId = new mongoose.Types.ObjectId();
+    const existingCandidate = {
+      _id: candidateId,
+      name: "Old Candidate",
       description: "Old Description",
-      completed: false,
-      start_date: new Date(),
-      deadline: new Date(),
+      university: "Old University",
       save: sinon.stub().resolvesThis(), // Mock save method
     };
-    // Stub Election.findById to return mock election
-    const findByIdStub = sinon.stub(Election, 'findById').resolves(existingElection);
+    // Stub Candidate.findById to return mock Candidate
+    const findByIdStub = sinon.stub(Candidate, 'findById').resolves(existingCandidate);
 
     // Mock request & response
     const req = {
-      params: { id: electionId },
-      body: { title: "New Election", completed: true }
+      params: { id: candidateId },
+      body: { name: "New Candidate"}
     };
     const res = {
       json: sinon.spy(), 
@@ -106,11 +103,10 @@ describe('Update Function Test', () => {
     };
 
     // Call function
-    await updateElection(req, res);
+    await updateCandidate(req, res);
 
     // Assertions
-    expect(existingElection.title).to.equal("New Election");
-    expect(existingElection.completed).to.equal(true);
+    expect(existingCandidate.name).to.equal("New Candidate");
     expect(res.status.called).to.be.false; // No error status should be set
     expect(res.json.calledOnce).to.be.true;
 
@@ -120,8 +116,8 @@ describe('Update Function Test', () => {
 
 
 
-  it('should return 404 if election is not found', async () => {
-    const findByIdStub = sinon.stub(Election, 'findById').resolves(null);
+  it('should return 404 if candidate is not found', async () => {
+    const findByIdStub = sinon.stub(Candidate, 'findById').resolves(null);
 
     const req = { params: { id: new mongoose.Types.ObjectId() }, body: {} };
     const res = {
@@ -129,16 +125,16 @@ describe('Update Function Test', () => {
       json: sinon.spy(),
     };
 
-    await updateElection(req, res);
+    await updateCandidate(req, res);
 
     expect(res.status.calledWith(404)).to.be.true;
-    expect(res.json.calledWith({ message: 'Election name not found' })).to.be.true;
+    expect(res.json.calledWith({ message: 'Candidate name not found' })).to.be.true;
 
     findByIdStub.restore();
   });
 
   it('should return 500 on error', async () => {
-    const findByIdStub = sinon.stub(Election, 'findById').throws(new Error('DB Error'));
+    const findByIdStub = sinon.stub(Candidate, 'findById').throws(new Error('DB Error'));
 
     const req = { params: { id: new mongoose.Types.ObjectId() }, body: {} };
     const res = {
@@ -146,7 +142,7 @@ describe('Update Function Test', () => {
       json: sinon.spy(),
     };
 
-    await updateElection(req, res);
+    await updateCandidate(req, res);
 
     expect(res.status.calledWith(500)).to.be.true;
     expect(res.json.called).to.be.true;
@@ -158,20 +154,20 @@ describe('Update Function Test', () => {
 
 });
 
-describe('GetElection Function Test', () => {
+describe('GetCandidate Function Test', () => {
 
-  it('should return elections for the given user', async () => {
+  it('should return candidate for the given user', async () => {
     // Mock user ID
     const userId = new mongoose.Types.ObjectId();
 
-    // Mock election data
-    const elections = [
-      { _id: new mongoose.Types.ObjectId(), title: "Election 1", userId },
-      { _id: new mongoose.Types.ObjectId(), title: "Election 2", userId }
+    // Mock Candidate data
+    const candidates= [
+      { _id: new mongoose.Types.ObjectId(), name: "Candidate 1", userId },
+      { _id: new mongoose.Types.ObjectId(), name: "Candidate 2", userId }
     ];
 
-    // Stub Election.find to return mock elections
-    const findStub = sinon.stub(Election, 'find').resolves(elections);
+    // Stub Candidate.find to return mock Candidate
+    const findStub = sinon.stub(Candidate, 'find').resolves(candidates);
 
     // Mock request & response
     const req = { user: { id: userId } };
@@ -181,11 +177,11 @@ describe('GetElection Function Test', () => {
     };
 
     // Call function
-    await getElection(req, res);
+    await getCandidate(req, res);
 
     // Assertions
     expect(findStub.calledOnceWith({ userId })).to.be.true;
-    expect(res.json.calledWith(elections)).to.be.true;
+    expect(res.json.calledWith(candidates)).to.be.true;
     expect(res.status.called).to.be.false; // No error status should be set
 
     // Restore stubbed methods
@@ -193,8 +189,8 @@ describe('GetElection Function Test', () => {
   });
 
   it('should return 500 on error', async () => {
-    // Stub Election.find to throw an error
-    const findStub = sinon.stub(Election, 'find').throws(new Error('DB Error'));
+    // Stub Candidate.find to throw an error
+    const findStub = sinon.stub(Candidate, 'find').throws(new Error('DB Error'));
 
     // Mock request & response
     const req = { user: { id: new mongoose.Types.ObjectId() } };
@@ -204,7 +200,7 @@ describe('GetElection Function Test', () => {
     };
 
     // Call function
-    await getElection(req, res);
+    await getCandidate(req, res);
 
     // Assertions
     expect(res.status.calledWith(500)).to.be.true;
@@ -218,17 +214,17 @@ describe('GetElection Function Test', () => {
 
 
 
-describe('DeleteElection Function Test', () => {
+describe('DeleteCandidate Function Test', () => {
 
-  it('should delete a election successfully', async () => {
+  it('should delete a candidate successfully', async () => {
     // Mock request data
     const req = { params: { id: new mongoose.Types.ObjectId().toString() } };
 
-    // Mock election found in the database
-    const election = { remove: sinon.stub().resolves() };
+    // Mock Candidate found in the database
+    const candidate = { remove: sinon.stub().resolves() };
 
-    // Stub Election.findById to return the mock election
-    const findByIdStub = sinon.stub(Election, 'findById').resolves(election);
+    // Stub Candidate.findById to return the mock Candidate
+    const findByIdStub = sinon.stub(Candidate, 'findById').resolves(candidate);
 
     // Mock response object
     const res = {
@@ -237,20 +233,20 @@ describe('DeleteElection Function Test', () => {
     };
 
     // Call function
-    await deleteElection(req, res);
+    await deleteCandidate(req, res);
 
     // Assertions
     expect(findByIdStub.calledOnceWith(req.params.id)).to.be.true;
-    expect(election.remove.calledOnce).to.be.true;
-    expect(res.json.calledWith({ message: 'Election deleted' })).to.be.true;
+    expect(candidate.remove.calledOnce).to.be.true;
+    expect(res.json.calledWith({ message: 'Candidate deleted' })).to.be.true;
 
     // Restore stubbed methods
     findByIdStub.restore();
   });
 
-  it('should return 404 if election is not found', async () => {
-    // Stub Election.findById to return null
-    const findByIdStub = sinon.stub(Election, 'findById').resolves(null);
+  it('should return 404 if candidate is not found', async () => {
+    // Stub Candidate.findById to return null
+    const findByIdStub = sinon.stub(Candidate, 'findById').resolves(null);
 
     // Mock request data
     const req = { params: { id: new mongoose.Types.ObjectId().toString() } };
@@ -262,20 +258,20 @@ describe('DeleteElection Function Test', () => {
     };
 
     // Call function
-    await deleteElection(req, res);
+    await deleteCandidate(req, res);
 
     // Assertions
     expect(findByIdStub.calledOnceWith(req.params.id)).to.be.true;
     expect(res.status.calledWith(404)).to.be.true;
-    expect(res.json.calledWith({ message: 'Election name not found' })).to.be.true;
+    expect(res.json.calledWith({ message: 'Candidate name not found' })).to.be.true;
 
     // Restore stubbed methods
     findByIdStub.restore();
   });
 
   it('should return 500 if an error occurs', async () => {
-    // Stub Election.findById to throw an error
-    const findByIdStub = sinon.stub(Election, 'findById').throws(new Error('DB Error'));
+    // Stub Candidate.findById to throw an error
+    const findByIdStub = sinon.stub(Candidate, 'findById').throws(new Error('DB Error'));
 
     // Mock request data
     const req = { params: { id: new mongoose.Types.ObjectId().toString() } };
@@ -287,7 +283,7 @@ describe('DeleteElection Function Test', () => {
     };
 
     // Call function
-    await deleteElection(req, res);
+    await deleteCandidate(req, res);
 
     // Assertions
     expect(res.status.calledWith(500)).to.be.true;
@@ -298,4 +294,3 @@ describe('DeleteElection Function Test', () => {
   });
 
 });
-
