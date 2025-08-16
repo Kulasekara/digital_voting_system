@@ -58,10 +58,9 @@ _(Make sure to remove the “s” from https:// if your browser adds it)_
 * **Use the following demo account to explore the platform:**
 
 👉 Admin Dashboard Access
+  Username: admin@gmail.com
+  Password: admin
 
-Username: admin@gmail.com
-
-Password: admin
 
 
 ⏳ **Progress**
@@ -73,3 +72,4 @@ Password: admin
 - [ ] View Results – Display election results and provide reports  
 - [ ] Notifications – Email alerts for election start dates and results  
 - [ ] User Management – Admins can view, edit, update, and delete users  
+
